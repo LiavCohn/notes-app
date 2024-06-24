@@ -6,7 +6,7 @@ import { useState ,useEffect} from "react";
 
 function ProtectedRoute({ children }) {
     const [isAuthorize, setIsAuthorize] = useState(null)
-    
+
     useEffect(() => {
         auth().catch(() => setIsAuthorize(false))
     }, []) // Empty dependency array means this effect runs only once when the component mounts
@@ -38,7 +38,7 @@ function ProtectedRoute({ children }) {
         }   
         const decoded = jwtDecode(token)
         const tokenExpiration = decoded.exp
-        const now = date.now() / 1000
+        const now = Date.now() / 1000
 
         if (tokenExpiration < now) { //expired
             await refreshToken()
